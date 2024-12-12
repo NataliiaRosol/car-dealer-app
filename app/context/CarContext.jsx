@@ -1,5 +1,6 @@
 "use client";
 import React, { createContext, useEffect, useState } from "react";
+const apiUrl = process.env.NEXT_PUBLIC_GET_CAR_BY_TYPE;
 
 export const CarContext = createContext(null);
 
@@ -9,10 +10,8 @@ function CarContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [selectedYear, setSelectedYear] = useState("");
 
-  // Поточний рік
   const currentYear = new Date().getFullYear();
 
-  // Створення списку років
   const years = Array.from(
     { length: currentYear - 2015 + 1 },
     (_, index) => 2015 + index
@@ -21,7 +20,7 @@ function CarContextProvider({ children }) {
   const fetchCarMakes = async () => {
     setLoading(true);
     try {
-      const response = await fetch(GET_CAR_BY_TYP);
+      const response = await fetch(apiUrl);
       const data = await response.json();
 
       const formattedMakes = data.Results.map((car) => ({
@@ -32,11 +31,12 @@ function CarContextProvider({ children }) {
 
       setCarMakes(formattedMakes);
     } catch (error) {
-      console.error("Error fetching car makes:", error);
+      throw new Error("Error fetching car models:", error);
     } finally {
       setLoading(false);
     }
   };
+
   const handleSelectChange = (event) => {
     setSelectedCarModel(event.target.value);
   };

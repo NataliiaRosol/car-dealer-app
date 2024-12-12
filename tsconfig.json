@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/components/ErrorResult.jsx"  ],
   "exclude": [
     "node_modules"
   ]

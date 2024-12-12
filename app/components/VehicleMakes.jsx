@@ -6,11 +6,8 @@ import { CarContext } from "../context/CarContext";
 function VehicleMakes() {
   const {
     carMakes,
-    setCarMakes,
     selectedCarModel,
-    setSelectedCarModel,
     loading,
-    setLoading,
     handleSelectChange,
   } = useContext(CarContext);
 
@@ -23,7 +20,7 @@ function VehicleMakes() {
         Select Car Model
       </label>
       {loading ? (
-        <div className="text-blue-600">Loading car makes...</div>
+        <div className="text-violet-600">Loading car models...</div>
       ) : (
         <select
           id="car-make-dropdown"

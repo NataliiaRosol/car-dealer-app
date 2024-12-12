@@ -6,7 +6,7 @@ import NextButton from "./components/NextButton";
 
 export default function Home() {
   return (
-    <main className="">
+    <main className="conainer">
       <h1 className="text-center text-3xl mt-6">Car Dealer App</h1>
       <VehicleMakes />
       <ModelYear />

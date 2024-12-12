@@ -1,3 +1,7 @@
+import ErrorResult from "../../../components/ErrorResult";
+import ResultCard from "../../../components/ResultCard";
+import fetchData from "./../../../utils/fetchData";
+
 export async function generateStaticParams() {
   const resultPaths = [
     { makeId: "440", yearId: "2015" },
@@ -11,23 +15,34 @@ export async function generateStaticParams() {
 
 async function ResultPage({ params }) {
   const { makeId, yearId } = await params;
-  const response = await fetch(
-    `https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/${makeId}/modelyear/${yearId}?format=json`
-  );
-  const data = await response.json();
+
+  const { data, error } = await fetchData(makeId, yearId);
+  
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">
-        Results for Make {makeId} in Year {yearId}
+    <div className="container mx-auto p-6">
+      { 
+        error ? <ErrorResult error={error.message} /> : <div>
+         <h1 className="text-2xl font-bold">
+        Results for car id {makeId} in year {yearId}
       </h1>
-      <ul className="mt-4">
-        {data.Results.map((model) => (
-          <li key={model.Model_ID} className="text-lg">
-            {model.Model_Name}
-          </li>
-        ))}
-      </ul>
+      {data && data?.Results.length > 0 ? (
+        <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {data.Results.map((model, index) => (
+            <li key={index} className="text-lg">
+              <ResultCard modelName={model.Model_Name} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="py-3 text-2xl text-center">
+          Sorry, no cars were found
+        </div>
+      )}
+
+      
+      </div>
+      }
     </div>
   );
 }

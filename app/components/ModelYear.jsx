@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { CarContext } from "../context/CarContext";
 
 function ModelYear() {
-  const { currentYear, years, selectedYear, setSelectedYear } =
+  const { years, selectedYear, setSelectedYear } =
     useContext(CarContext);
 
   return (
@@ -34,7 +34,7 @@ function ModelYear() {
       {selectedYear && (
         <p className="mt-4 text-lg text-gray-600">
           You selected:{" "}
-          <span className="font-bold text-gray-800">{selectedYear}</span>
+          <span className="font-bold text-gray-800">{selectedYear} </span> year
         </p>
       )}
     </div>

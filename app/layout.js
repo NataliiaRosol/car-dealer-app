@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="min-h-screen flex flex-col">
-          <header className="h-10 bg-violet-200 sticky"></header>
+          <header className="h-10 bg-violet-200"></header>
           <div className="flex-grow bg-gray-100">
             <CarContextProvider>{children}</CarContextProvider>
           </div>

@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Car Dealer App
 
-## Getting Started
+Overview
 
-First, run the development server:
+The Car Dealer App allows users to select a car make and model year and view the available results for those specifications. This project is built with Next.js, and it uses React Context API for state management.
 
-```bash
+File Structure
+
+1. Home Page (page.jsx):
+The main entry point of the application.
+
+2. VehicleMakes Component (VehicleMakes.jsx):
+ - A dropdown menu for selecting the car make. It fetches and displays car models dynamically.
+
+Key Features:
+ - Displays a loading indicator when fetching data.
+ - Shows a dropdown for selecting car models.
+ - Displays the selected car model ID.
+
+3. ModelYear Component (ModelYear.jsx):
+ - A dropdown menu for selecting a model year.
+
+Key Features:
+ - Dynamically displays years fetched from the context.
+ - Allows the user to select a year.
+ - Displays the selected year below the dropdown.
+
+4. NextButton Component (NextButton.jsx):
+ - A button that navigates the user to the results page.
+
+Key Features:
+ - Disabled until both a car model and year are selected.
+ - Redirects to a dynamic results page using the selected car model and year.
+
+5. Results Page (/result/[makeId]/[yearId]):
+
+Dynamically displays the results based on the car make and year selected by the user.
+
+Key Features:
+ - Fetches data from an external API based on makeId and yearId parameters.
+ - Displays a list of results if found.
+ - Shows an error message if there is an issue with fetching data or if no results are found.
+
+6. ErrorResult Component (ErrorResult.jsx):
+
+Displays an error message if fetching data fails.
+
+7. Context (CarContext.jsx):
+
+Manages global state for car makes, selected car model, and year.
+
+    How to Run
+
+Install Dependencies:
+npm install
+
+Run the Development Server:
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Access the App:
+Open your browser and go to http://localhost:3000.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Key Features
+ - Dynamic dropdown menus for car make and model year.
+ - Error handling for API requests.
+ - Dynamic routing to results pages.
+ - Responsive UI using Tailwind CSS.
+ - API Integration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app fetches data from the following API:
 
-## Learn More
+https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/makeId/{makeId}/modelyear/{yearId}?format=json
 
-To learn more about Next.js, take a look at the following resources:
+Tools & Technologies
+ - Framework: Next.js
+ - State Management: React Context API
+ - Styling: Tailwind CSS
+ - Error Handling: Custom error components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
