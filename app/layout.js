@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import CarContextProvider from "./context/CarContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +23,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="min-h-screen flex flex-col">
+          <header className="h-10 bg-violet-200 sticky"></header>
+          <div className="flex-grow bg-gray-100">
+            <CarContextProvider>{children}</CarContextProvider>
+          </div>
+          <footer className="h-10 bg-violet-200"></footer>
+        </div>
       </body>
     </html>
   );
